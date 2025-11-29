@@ -1,21 +1,94 @@
+/**
+ * App.css - Global Portfolio Stylesheet
+ * 
+ * This file contains all styling for the portfolio website including:
+ * - Base/reset styles
+ * - Header and hero section
+ * - Component sections (About, Skills, Projects, GitHub)
+ * - Footer
+ * - Back-to-top button
+ * - Custom scrollbar styling
+ * - Responsive design rules
+ */
+
+/* ==========================================
+   CSS COLOR VARIABLES
+   ========================================== */
+
+:root {
+  /* Background Colors */
+  --color-bg-dark: #0f0e17;           /* Main dark background */
+  --color-bg-section: #16213e;        /* Lighter section background */
+  
+  /* Purple Palette */
+  --color-purple-light: #a78bfa;      /* Light purple - primary accent */
+  --color-purple-medium: #7c3aed;     /* Medium purple */
+  --color-purple-bright: #9333ea;     /* Bright purple - hover state */
+  --color-purple-lighter: #e9d5ff;    /* Very light purple - text on purple */
+  --color-purple-pale: #ddd6fe;       /* Pale purple - hover text */
+  
+  /* Indigo Palette */
+  --color-indigo-base: #6366f1;       /* Base indigo */
+  --color-indigo-light: #818cf8;      /* Light indigo */
+  --color-indigo-text: #e0e7ff;       /* Light text on indigo */
+  
+  /* Text Colors */
+  --color-text-light: #e0e1ff;        /* Main light text */
+  --color-text-muted: #c4b5fd;        /* Muted purple text */
+  --color-text-white: #ffffff;        /* Pure white */
+  
+  /* Border & Shadow Colors */
+  --color-border: #2a2d5e;            /* Border color */
+  --color-shadow: rgba(0, 0, 0, 0.5); /* Shadow color */
+  
+  /* Gradient Colors */
+  --color-gradient-purple: linear-gradient(180deg, #7c3aed 0%, #6366f1 100%);
+  --color-gradient-purple-hover: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
+  --color-gradient-header: linear-gradient(180deg, #0f0e17 0%, #16213e 100%);
+  
+  /* Reusable Spacing */
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Reusable Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-full: 25px;
+  --radius-circle: 50%;
+  
+  /* Reusable Shadows & Box Styles */
+  --section-box: box-shadow 0 1px 3px var(--color-shadow); border: 1px solid var(--color-border);
+}
+
+/* ==========================================
+   RESET & BASE STYLES
+   ========================================== */
+
+/* Remove default margins and padding from all elements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Enable smooth scrolling behavior across the page */
 html {
   scroll-behavior: smooth;
 }
 
+/* Global body styles */
 body {
+  /* System font stack for optimal performance and compatibility */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
-  background: #0f0e17;
-  color: #e0e1ff;
+  background: var(--color-bg-dark);
+  color: var(--color-text-light);
   min-height: 100vh;
 }
 
-/* Font Awesome Icon Styles */
+/* Font Awesome Icon Support (if needed in future) */
 i {
   display: inline-block;
 }
@@ -24,315 +97,410 @@ i[class*="fa-"] {
   font-style: normal;
 }
 
+/* Root container for React */
 #root {
   width: 100%;
   min-height: 100vh;
 }
 
+/* ==========================================
+   MAIN PORTFOLIO CONTAINER
+   ========================================== */
+
+/* Main portfolio flex container */
 .portfolio {
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #0f0e17;
+  background: var(--color-bg-dark);
 }
 
-/* Header Section */
+/* ==========================================
+   HEADER / HERO SECTION
+   ========================================== */
+
+/* Header with gradient background and shadow */
 .header {
-  background: linear-gradient(180deg, #0f0e17 0%, #16213e 100%);
-  color: #e0e1ff;
+  background: var(--color-gradient-header);
+  color: var(--color-text-light);
   padding: 4rem 2rem;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  border-bottom: 1px solid #2a2d5e;
+  box-shadow: 0 1px 3px var(--color-shadow);
+  border-bottom: 1px solid var(--color-border);
 }
 
+/* Center and constrain header content */
 .header-content {
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* User's name - large prominent heading */
 .name {
   font-size: 3rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
   letter-spacing: -1px;
-  color: #a78bfa;
+  color: var(--color-purple-light);
 }
 
+/* Professional tagline or job title */
 .tagline {
   font-size: 1.3rem;
   opacity: 0.9;
   font-weight: 300;
-  margin-bottom: 1.5rem;
-  color: #c4b5fd;
+  margin-bottom: 0;
+  color: var(--color-text-muted);
 }
 
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
+/* ==========================================
+   MAIN CONTENT SECTIONS - GENERIC
+   ========================================== */
 
-.social-link {
-  color: #a78bfa;
-  text-decoration: none;
-  padding: 0.75rem 1.5rem;
-  border: 1px solid #2a2d5e;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  background: transparent;
-}
-
-.social-link:hover {
-  background: #7c3aed;
-  color: #ffffff;
-  border-color: #7c3aed;
-  transform: translateY(-3px);
-}
-
-/* Main Content Sections */
+/* Generic section styling */
 .section {
   flex: 1;
-  padding: 3rem 2rem;
+  padding: var(--spacing-2xl) var(--spacing-md);
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
 }
 
+/* Section headings */
 .section h2 {
   font-size: 2rem;
-  color: #a78bfa;
-  margin-bottom: 2rem;
+  color: var(--color-purple-light);
+  margin-bottom: var(--spacing-xl);
   text-align: center;
   font-weight: 600;
 }
 
-/* About Section */
+/* Reusable section container styles */
+.about-section,
+.skills-section,
+.github-section,
+.projects-section {
+  background: var(--color-bg-section);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) auto;
+  box-shadow: 0 1px 3px var(--color-shadow);
+  border: 1px solid var(--color-border);
+}
+
+/* All section h2 headings */
+.about-section h2,
+.skills-section h2,
+.github-section h2,
+.projects-section h2 {
+  color: var(--color-purple-light);
+}
+
+/* ==========================================
+   ABOUT SECTION
+   ========================================== */
+
+/* About section container */
 .about-section {
-  background: #16213e;
-  border-radius: 12px;
-  margin: 2rem auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  border: 1px solid #2a2d5e;
+  background: var(--color-bg-section);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) auto;
+  box-shadow: 0 1px 3px var(--color-shadow);
+  border: 1px solid var(--color-border);
 }
 
 .about-section h2 {
-  color: #a78bfa;
+  color: var(--color-purple-light);
 }
 
+/* About content flexbox layout */
 .about-content {
   text-align: center;
-  padding: 1rem;
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xl);
 }
 
+/* About section paragraph text */
 .about-content p {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: #c4b5fd;
+  color: var(--color-text-muted);
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0;
 }
 
-/* Skills Section */
+/* Social links container - flexbox for layout */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-md);
+}
+
+/* Individual social link styling */
+.social-link {
+  color: var(--color-purple-light);
+  text-decoration: none;
+  padding: 0.75rem var(--spacing-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: all 0.3s ease;
+  font-weight: 600;
+  background: transparent;
+}
+
+/* Social link hover state */
+.social-link:hover {
+  background: var(--color-purple-medium);
+  color: var(--color-text-white);
+  border-color: var(--color-purple-medium);
+  transform: translateY(-3px);
+}
+
+/* ==========================================
+   SKILLS SECTION
+   ========================================== */
+
+/* Skills section container */
 .skills-section {
-  background: #16213e;
-  border-radius: 12px;
-  margin: 2rem auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  border: 1px solid #2a2d5e;
+  background: var(--color-bg-section);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) auto;
+  box-shadow: 0 1px 3px var(--color-shadow);
+  border: 1px solid var(--color-border);
 }
 
 .skills-section h2 {
-  color: #a78bfa;
+  color: var(--color-purple-light);
 }
 
+/* Grid layout for skill categories */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md);
 }
 
+/* Individual skill category */
 .skill-category {
-  background: #0f0e17;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border-left: 4px solid #a78bfa;
+  background: var(--color-bg-dark);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--color-purple-light);
 }
 
+/* Skill category heading */
 .skill-category h3 {
-  color: #a78bfa;
-  margin-bottom: 1.5rem;
+  color: var(--color-purple-light);
+  margin-bottom: var(--spacing-lg);
   font-size: 1.1rem;
 }
 
+/* Container for individual skill badges */
 .skills-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
+  gap: var(--spacing-md);
 }
 
+/* Base skill badge styling */
 .skill-badge {
-  padding: 1rem;
-  border-radius: 8px;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-sm);
   text-align: center;
   font-weight: 600;
   font-size: 0.95rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
-  border: 1px solid #2a2d5e;
+  border: 1px solid var(--color-border);
 }
 
+/* Badge hover state - reusable */
+.skill-badge:hover {
+  transform: translateY(-5px);
+}
+
+/* Programming language badges - darker purple */
 .skill-badge.language {
-  background: #7c3aed;
-  color: #e9d5ff;
+  background: var(--color-purple-medium);
+  color: var(--color-purple-lighter);
   box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
 }
 
+/* Programming language badge hover state */
 .skill-badge.language:hover {
-  transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
-  background: #9333ea;
+  background: var(--color-purple-bright);
 }
 
+/* Tool badges - indigo */
 .skill-badge.tool {
-  background: #6366f1;
-  color: #e0e7ff;
+  background: var(--color-indigo-base);
+  color: var(--color-indigo-text);
   box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
 }
 
+/* Tool badge hover state */
 .skill-badge.tool:hover {
-  transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
-  background: #818cf8;
+  background: var(--color-indigo-light);
 }
 
-/* GitHub Section */
+/* ==========================================
+   GITHUB SECTION
+   ========================================== */
+
+/* GitHub section container */
 .github-section {
-  background: #16213e;
-  border-radius: 12px;
-  margin: 2rem auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  border: 1px solid #2a2d5e;
+  background: var(--color-bg-section);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) auto;
+  box-shadow: 0 1px 3px var(--color-shadow);
+  border: 1px solid var(--color-border);
 }
 
 .github-section h2 {
-  color: #a78bfa;
+  color: var(--color-purple-light);
 }
 
+/* GitHub content flexbox layout */
 .github-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  padding: 1rem;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md);
 }
 
+/* GitHub profile note */
 .github-note {
   text-align: center;
-  color: #c4b5fd;
+  color: var(--color-text-muted);
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
+/* GitHub profile link */
 .github-note a {
-  color: #a78bfa;
+  color: var(--color-purple-light);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
 }
 
+/* GitHub profile link hover state */
 .github-note a:hover {
-  color: #ddd6fe;
+  color: var(--color-purple-pale);
   text-decoration: underline;
 }
 
+/* GitHub stats images (responsive) */
 .github-stats {
   width: 100%;
   max-width: 600px;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
-/* Projects Section */
+/* ==========================================
+   PROJECTS SECTION
+   ========================================== */
+
+/* Projects section container */
 .projects-section {
-  background: #16213e;
-  border-radius: 12px;
-  margin: 2rem auto;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-  border: 1px solid #2a2d5e;
+  background: var(--color-bg-section);
+  border-radius: var(--radius-md);
+  margin: var(--spacing-xl) auto;
+  box-shadow: 0 1px 3px var(--color-shadow);
+  border: 1px solid var(--color-border);
 }
 
 .projects-section h2 {
-  color: #a78bfa;
+  color: var(--color-purple-light);
 }
 
+/* Grid layout for project cards */
 .projects-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
+  gap: var(--spacing-xl);
+  padding: var(--spacing-md);
 }
 
+/* Individual project card */
 .project-card {
-  background: #0f0e17;
-  padding: 2rem;
-  border-radius: 8px;
-  border-left: 4px solid #7c3aed;
-  border: 1px solid #2a2d5e;
+  background: var(--color-bg-dark);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+/* Project card hover state */
 .project-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
-  border-color: #a78bfa;
+  border-color: var(--color-purple-light);
 }
 
+/* Project title in card */
 .project-card h3 {
-  color: #a78bfa;
+  color: var(--color-purple-light);
   font-size: 1.3rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
+/* Project description text */
 .project-card p {
-  color: #c4b5fd;
+  color: var(--color-text-muted);
   line-height: 1.6;
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
+/* Container for project technology tags */
 .project-tags {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
   flex-wrap: wrap;
 }
 
+/* Individual technology tag */
 .tag {
-  background: #6366f1;
-  color: #e0e7ff;
+  background: var(--color-indigo-base);
+  color: var(--color-indigo-text);
   padding: 0.3rem 0.8rem;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 600;
 }
 
-/* Footer */
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+/* Footer container */
 .footer {
-  background: #0f0e17;
-  color: #c4b5fd;
+  background: var(--color-bg-dark);
+  color: var(--color-text-muted);
   text-align: center;
-  padding: 2rem;
-  margin-top: 2rem;
+  padding: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
   font-size: 0.9rem;
-  border-top: 1px solid #2a2d5e;
+  border-top: 1px solid var(--color-border);
 }
 
-/* Responsive Design */
+/* ==========================================
+   RESPONSIVE DESIGN - TABLET
+   ========================================== */
+
 @media (max-width: 768px) {
+  /* Reduce header text sizes */
   .name {
     font-size: 2rem;
   }
@@ -341,23 +509,27 @@ i[class*="fa-"] {
     font-size: 1rem;
   }
 
+  /* Reduce section padding */
   .section {
-    padding: 2rem 1rem;
+    padding: var(--spacing-xl) var(--spacing-md);
   }
 
   .section h2 {
     font-size: 1.5rem;
   }
 
+  /* Single column for skills grid */
   .skills-grid {
     grid-template-columns: 1fr;
   }
 
+  /* Adjust skill badges on smaller screens */
   .skills-container {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     gap: 0.75rem;
   }
 
+  /* Single column for projects on tablet */
   .projects-container {
     grid-template-columns: 1fr;
   }
@@ -366,16 +538,123 @@ i[class*="fa-"] {
     padding: 0;
   }
 
+  /* Adjust social links spacing */
   .social-links {
-    gap: 1rem;
+    gap: var(--spacing-md);
   }
 
   .social-link {
-    padding: 0.6rem 1.2rem;
+    padding: 0.6rem var(--spacing-md);
     font-size: 0.9rem;
   }
 
+  /* Full width GitHub stats */
   .github-stats {
     max-width: 100%;
   }
+}
+
+/* ==========================================
+   BACK TO TOP BUTTON
+   ========================================== */
+
+/* Floating button positioned fixed at bottom-right */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-circle);
+  border: none;
+  background: var(--color-gradient-purple);
+  color: var(--color-text-white);
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(99, 102, 241, 0.25);
+  transition: transform 180ms ease, opacity 180ms ease;
+  opacity: 0.95;
+  z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+  outline: none;
+}
+
+/* Back to top hover state */
+.back-to-top:hover {
+  transform: translateY(-4px);
+  opacity: 1;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN - MOBILE
+   ========================================== */
+
+@media (max-width: 480px) {
+  /* Adjust back-to-top button for small screens */
+  .back-to-top {
+    right: 14px;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  /* Reduce header padding on mobile */
+  .header {
+    padding: 2.2rem var(--spacing-md);
+  }
+
+  /* Smaller name on mobile */
+  .name {
+    font-size: 1.6rem;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+  }
+}
+
+/* ==========================================
+   CUSTOM SCROLLBAR STYLING
+   Matches the dark purple theme
+   ========================================== */
+
+/* WebKit browsers (Chrome, Edge, Safari) */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+/* Scrollbar track (background) */
+*::-webkit-scrollbar-track {
+  background: var(--color-bg-dark);
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* Scrollbar thumb (draggable element) */
+*::-webkit-scrollbar-thumb {
+  background: var(--color-gradient-purple);
+  border-radius: 999px;
+  border: 3px solid var(--color-bg-dark);
+}
+
+/* Scrollbar thumb hover state */
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gradient-purple-hover);
+}
+
+/* Firefox scrollbar styling */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-purple-medium) var(--color-bg-dark);
+}
+
+/* Improve visibility on focused elements */
+*:focus {
+  outline-offset: 2px;
 }
